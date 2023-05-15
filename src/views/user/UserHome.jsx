@@ -25,17 +25,19 @@ const UserHome = () => {
       </Backdrop>
     );
 
-  if (books.length === 0) return <h2>Library is empty</h2>;
-
   return (
     <>
       <Header />
       <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
-        <Stack spacing={2}>
-          {books.map((book) => (
-            <MediaControlCard key={book.id} book={book} />
-          ))}
-        </Stack>
+        {books.length === 0 ? (
+          <h2>Library is empty</h2>
+        ) : (
+          <Stack spacing={2}>
+            {books.map((book) => (
+              <MediaControlCard key={book.id} book={book} />
+            ))}
+          </Stack>
+        )}
       </div>
     </>
   );
