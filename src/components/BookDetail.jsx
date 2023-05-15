@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../api";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
@@ -30,7 +30,6 @@ const categories = [
 
 const BookDetail = () => {
   const { id } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user?.role) === "admin";
@@ -65,22 +64,30 @@ const BookDetail = () => {
   const addBookHandle = () => {
     const formData = getFormData();
 
-    api.Book.post(formData).then((response) => {
-      if (!response?.error) {
-        Swal.fire({
-          icon: "success",
-          title: "Your book has been saved",
-          showConfirmButton: false,
-          timer: 1500,
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showCancelButton: true,
+      confirmButtonText: "Save",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        api.Book.post(formData).then((response) => {
+          if (!response?.error) {
+            Swal.fire({
+              icon: "success",
+              title: "Saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(`/book/${response.id}`);
+            setReadOnly(true);
+          } else
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: response?.error?.message,
+            });
         });
-        navigate(`/book/${response.id}`);
-        setReadOnly(true);
-      } else
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: response?.error?.message,
-        });
+      }
     });
   };
 
@@ -176,7 +183,7 @@ const BookDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (location.pathname.endsWith("new")) {
+    if (id === "new") {
       setReadOnly(false);
       setAuthor("");
       setTitle("");
@@ -185,7 +192,7 @@ const BookDetail = () => {
       setPages("");
       setDescription("");
     }
-  }, [location]);
+  }, [id]);
 
   return (
     <>

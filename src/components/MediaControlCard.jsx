@@ -87,7 +87,7 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
   };
 
   return (
-    <Card sx={{ display: "flex", height: { sm: 200, lg: 170 } }}>
+    <Card sx={{ display: "flex", height: { sm: 200, lg: 230 } }}>
       <CardMedia
         component="img"
         sx={{ width: "30%" }}
@@ -121,14 +121,22 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
           )}
         </CardContent>
         <Box
-          sx={{ display: "flex", alignItems: "center", pl: 2, pb: 2, gap: 4 }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            pl: 2,
+            pb: 2,
+            gap: { xs: 1, md: 2, lg: 4 },
+          }}
         >
           {!isCart && (
             <Button
               startIcon={<AddShoppingCartIcon />}
               onClick={addToCartHandle}
             >
-              Add to cart
+              <Typography sx={{ display: { xs: "none", md: "block" } }}>
+                Add to cart
+              </Typography>
             </Button>
           )}
 
@@ -143,7 +151,9 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
             color="secondary"
             onClick={() => navigate(`/book/${book.id}`)}
           >
-            View
+            <Typography sx={{ display: { xs: "none", md: "block" } }}>
+              View
+            </Typography>
           </Button>
         </Box>
       </Box>
