@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Review from "./Review";
 import { useSelector } from "react-redux";
@@ -16,6 +16,7 @@ const ReviewSection = () => {
       console.log(response);
       setReviews(response);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!reviews) return <p>Loading...</p>;

@@ -180,6 +180,7 @@ const BookDetail = () => {
       setCover(data.cover && "http://localhost:5000/" + data.cover);
       setSelectedFile(data.cover);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

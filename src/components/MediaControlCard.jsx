@@ -94,7 +94,7 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
         image={
           book?.cover
             ? "http://localhost:5000/" + book.cover
-            : "https://thebiologist.rsb.org.uk/images/biologist/Cats_genetics.jpg"
+            : "https://www.ufwc.co.uk/images/no-img-placeholder.png"
         }
         alt="Book from library"
       />
