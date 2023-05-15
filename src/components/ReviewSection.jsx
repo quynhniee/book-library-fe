@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Review from "./Review";
 import { useSelector } from "react-redux";

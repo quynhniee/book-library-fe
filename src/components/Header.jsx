@@ -44,9 +44,21 @@ export default function Header() {
     navigate("/cart");
   };
 
-  const actions = isAuth
+  const actions = isAdmin
+    ? [
+        {
+          icon: <AddIcon />,
+          name: "Add book",
+          action: addBookHandle,
+        },
+        { icon: <HomeIcon />, name: "Home", action: homeHandle },
+
+        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
+      ]
+    : isAuth
     ? [
         { icon: <HomeIcon />, name: "Home", action: homeHandle },
+
         {
           icon: <ShoppingCartIcon />,
           name: "Cart",
@@ -54,20 +66,11 @@ export default function Header() {
         },
         { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
       ]
-    : isAdmin
-    ? [
-        { icon: <HomeIcon />, name: "Home", action: homeHandle },
-        {
-          icon: <AddIcon />,
-          name: "Add book",
-          action: addBookHandle,
-        },
-        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-      ]
     : [
         { icon: <HomeIcon />, name: "Home", action: homeHandle },
         { icon: <LoginIcon />, name: "Login", action: loginHandle },
       ];
+
   return (
     <Box sx={{ flexGrow: 1, position: "absolute", top: 0, left: 0, right: 0 }}>
       <AppBar position="static">
@@ -87,13 +90,11 @@ export default function Header() {
           {/* <Button color="inherit">Login</Button> */}
           <Stack spacing={2} direction="row">
             {actions.map((action) => (
-              <Link>
-                <Tooltip title={action.name}>
-                  <IconButton sx={{ color: "#fff" }} onClick={action.action}>
-                    {action.icon}
-                  </IconButton>
-                </Tooltip>
-              </Link>
+              <Tooltip title={action.name}>
+                <IconButton sx={{ color: "#fff" }} onClick={action.action}>
+                  {action.icon}
+                </IconButton>
+              </Tooltip>
             ))}
           </Stack>
         </Toolbar>

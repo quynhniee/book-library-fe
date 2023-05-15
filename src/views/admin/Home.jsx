@@ -9,12 +9,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import api from "../../api";
 import { useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Header from "../../components/Header";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -98,9 +100,9 @@ const Home = () => {
       </TableRow>
     ));
 
-  if (books.length === 0) return <h2>Library is empty!</h2>;
   return (
     <>
+      <Header />
       <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
         {isAuth && role === "admin" && (
           <Button
@@ -112,23 +114,42 @@ const Home = () => {
             Add Book
           </Button>
         )}
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
-                <TableCell>Tiêu đề</TableCell>
-                <TableCell align="right">Tác giả</TableCell>
-                <TableCell align="right">Thể loại</TableCell>
-                <TableCell align="right">Ngày phát hành</TableCell>
-                <TableCell align="right">Số trang</TableCell>
-                <TableCell align="right">Đã bán</TableCell>
+                <TableCell>
+                  <b>Tiêu đề</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>Tác giả</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>Thể loại</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>Ngày phát hành</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>Số trang</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>Đã bán</b>
+                </TableCell>
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
 
-            <TableBody>
-              {loading === true ? <TableSkeleton /> : <TableRows />}
-            </TableBody>
+            {books.length === 0 ? (
+              <Typography variant="h4" margin={3}>
+                Library is empty!
+              </Typography>
+            ) : (
+              <TableBody>
+                {loading === true ? <TableSkeleton /> : <TableRows />}
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </div>

@@ -17,7 +17,7 @@ const SpeedDialButton = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const isAdmin = useSelector((state) => state.auth?.user?.role) === "admin";
+  const isAdmin = useSelector((state) => state.auth.user?.role) === "admin";
 
   const loginHandle = () => {
     navigate("/login");
@@ -41,17 +41,7 @@ const SpeedDialButton = () => {
     navigate("/cart");
   };
 
-  const actions = isAuth
-    ? [
-        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-        { icon: <HomeIcon />, name: "Home", action: homeHandle },
-        {
-          icon: <ShoppingCartIcon />,
-          name: "Cart",
-          action: cartHandle,
-        },
-      ]
-    : isAdmin
+  const actions = isAdmin
     ? [
         { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
         { icon: <HomeIcon />, name: "Home", action: homeHandle },
@@ -59,6 +49,17 @@ const SpeedDialButton = () => {
           icon: <AddIcon />,
           name: "Add book",
           action: addBookHandle,
+        },
+      ]
+    : isAuth
+    ? [
+        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
+        { icon: <HomeIcon />, name: "Home", action: homeHandle },
+
+        {
+          icon: <ShoppingCartIcon />,
+          name: "Cart",
+          action: cartHandle,
         },
       ]
     : [

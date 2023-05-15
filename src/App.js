@@ -43,7 +43,7 @@ const App = () => {
         }}
         justifyContent="center"
         bgcolor="#e3e3ff"
-        paddingTop={5}
+        paddingTop={7}
       >
         <Container maxWidth="xl">
           <Suspense>
