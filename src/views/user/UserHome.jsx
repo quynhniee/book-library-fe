@@ -11,7 +11,6 @@ const UserHome = () => {
     api.Book.getAll().then((response) => {
       setBooks(response);
       setLoading(false);
-      console.log(response);
     });
   }, []);
 
@@ -25,14 +24,18 @@ const UserHome = () => {
       </Backdrop>
     );
 
+  if (books.length === 0) return <h2>Library is empty</h2>;
+
   return (
-    <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
-      <Stack spacing={2}>
-        {books.map((book) => (
-          <MediaControlCard key={book.id} book={book} />
-        ))}
-      </Stack>
-    </div>
+    <>
+      <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
+        <Stack spacing={2}>
+          {books.map((book) => (
+            <MediaControlCard key={book.id} book={book} />
+          ))}
+        </Stack>
+      </div>
+    </>
   );
 };
 

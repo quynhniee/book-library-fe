@@ -37,7 +37,7 @@ const Home = () => {
         api.Book.delete(id).then((response) => {
           if (!response?.error) {
             setBooks(books.filter((book) => book.id !== id));
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Swal.fire("Deleted!", "Book has been deleted.", "success");
           } else {
             Swal.fire("Oops..", response?.error?.message, "error");
           }
@@ -98,38 +98,41 @@ const Home = () => {
       </TableRow>
     ));
 
+  if (books.length === 0) return <h2>Library is empty!</h2>;
   return (
-    <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
-      {isAuth && role === "admin" && (
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          sx={{ marginBottom: 3 }}
-          onClick={() => navigate("/book/new")}
-        >
-          Add Book
-        </Button>
-      )}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Tiêu đề</TableCell>
-              <TableCell align="right">Tác giả</TableCell>
-              <TableCell align="right">Thể loại</TableCell>
-              <TableCell align="right">Ngày phát hành</TableCell>
-              <TableCell align="right">Số trang</TableCell>
-              <TableCell align="right">Đã bán</TableCell>
-              <TableCell align="right"></TableCell>
-            </TableRow>
-          </TableHead>
+    <>
+      <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
+        {isAuth && role === "admin" && (
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{ marginBottom: 3 }}
+            onClick={() => navigate("/book/new")}
+          >
+            Add Book
+          </Button>
+        )}
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Tiêu đề</TableCell>
+                <TableCell align="right">Tác giả</TableCell>
+                <TableCell align="right">Thể loại</TableCell>
+                <TableCell align="right">Ngày phát hành</TableCell>
+                <TableCell align="right">Số trang</TableCell>
+                <TableCell align="right">Đã bán</TableCell>
+                <TableCell align="right"></TableCell>
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {loading === true ? <TableSkeleton /> : <TableRows />}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+            <TableBody>
+              {loading === true ? <TableSkeleton /> : <TableRows />}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
   );
 };
 

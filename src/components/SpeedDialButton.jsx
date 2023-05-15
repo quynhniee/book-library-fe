@@ -44,7 +44,7 @@ const SpeedDialButton = () => {
   const actions = isAuth
     ? [
         { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-        { icon: <HomeIcon />, name: "Hone", action: homeHandle },
+        { icon: <HomeIcon />, name: "Home", action: homeHandle },
         {
           icon: <ShoppingCartIcon />,
           name: "Cart",
@@ -54,7 +54,7 @@ const SpeedDialButton = () => {
     : isAdmin
     ? [
         { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-        { icon: <HomeIcon />, name: "Hone", action: homeHandle },
+        { icon: <HomeIcon />, name: "Home", action: homeHandle },
         {
           icon: <AddIcon />,
           name: "Add book",
@@ -63,7 +63,7 @@ const SpeedDialButton = () => {
       ]
     : [
         { icon: <LoginIcon />, name: "Login", action: loginHandle },
-        { icon: <HomeIcon />, name: "Hone", action: homeHandle },
+        { icon: <HomeIcon />, name: "Home", action: homeHandle },
       ];
 
   return (
