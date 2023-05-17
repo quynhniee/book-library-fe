@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MediaControlCard from "../../components/MediaControlCard";
 import api from "../../api";
 import { Backdrop, CircularProgress, Stack } from "@mui/material";
-import Header from "../../components/Header";
 
 const UserHome = () => {
   const [books, setBooks] = useState([]);
@@ -27,7 +26,6 @@ const UserHome = () => {
 
   return (
     <>
-      <Header />
       <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
         {books.length === 0 ? (
           <h2>Library is empty</h2>

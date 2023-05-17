@@ -7,6 +7,7 @@ import { useJwt } from "react-jwt";
 import { authAction } from "./redux/auth/auth";
 import api from "./api";
 import SpeedDialButton from "./components/SpeedDialButton";
+import Header from "./components/Header";
 
 const Login = lazy(() => import("./views/Login"));
 const Signup = lazy(() => import("./views/Signup"));
@@ -45,6 +46,7 @@ const App = () => {
         bgcolor="#e3e3ff"
         paddingTop={7}
       >
+        <Header />
         <Container maxWidth="xl">
           <Suspense>
             <BrowserRouter>

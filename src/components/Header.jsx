@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { authAction } from "../redux/auth/auth";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -16,59 +16,58 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Stack, Tooltip } from "@mui/material";
 
 export default function Header() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth?.user?.role) === "admin";
 
-  const loginHandle = () => {
-    navigate("/login");
-  };
-
   const logoutHandle = () => {
     dispatch(authAction.logout());
-    navigate("/login");
     localStorage.removeItem("token");
   };
 
-  const addBookHandle = () => {
-    navigate("/book/new");
-  };
+  // const loginHandle = () => {
+  //   navigate("/login");
+  // };
 
-  const homeHandle = () => {
-    navigate("/");
-  };
+  // const addBookHandle = () => {
+  //   navigate("/book/new");
+  // };
 
-  const cartHandle = () => {
-    navigate("/cart");
-  };
+  // const homeHandle = () => {
+  //   navigate("/");
+  // };
 
-  const actions = isAdmin
-    ? [
-        {
-          icon: <AddIcon />,
-          name: "Add book",
-          action: addBookHandle,
-        },
-        { icon: <HomeIcon />, name: "Home", action: homeHandle },
+  // const cartHandle = () => {
+  //   navigate("/cart");
+  // };
 
-        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-      ]
-    : isAuth
-    ? [
-        { icon: <HomeIcon />, name: "Home", action: homeHandle },
+  // const actions = isAdmin
+  //   ? [
+  //       {
+  //         icon: <AddIcon />,
+  //         name: "Add book",
+  //         action: addBookHandle,
+  //       },
+  //       { icon: <HomeIcon />, name: "Home", action: homeHandle },
 
-        {
-          icon: <ShoppingCartIcon />,
-          name: "Cart",
-          action: cartHandle,
-        },
-        { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
-      ]
-    : [
-        { icon: <HomeIcon />, name: "Home", action: homeHandle },
-        { icon: <LoginIcon />, name: "Login", action: loginHandle },
-      ];
+  //       { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
+  //     ]
+  //   : isAuth
+  //   ? [
+  //       { icon: <HomeIcon />, name: "Home", action: homeHandle },
+
+  //       {
+  //         icon: <ShoppingCartIcon />,
+  //         name: "Cart",
+  //         action: cartHandle,
+  //       },
+  //       { icon: <LogoutIcon />, name: "Logout", action: logoutHandle },
+  //     ]
+  //   : [
+  //       { icon: <HomeIcon />, name: "Home", action: homeHandle },
+  //       { icon: <LoginIcon />, name: "Login", action: loginHandle },
+  //     ];
 
   return (
     <Box sx={{ flexGrow: 1, position: "absolute", top: 0, left: 0, right: 0 }}>
@@ -88,13 +87,56 @@ export default function Header() {
           </Typography>
           {/* <Button color="inherit">Login</Button> */}
           <Stack spacing={2} direction="row">
-            {actions.map((action) => (
-              <Tooltip title={action.name}>
-                <IconButton sx={{ color: "#fff" }} onClick={action.action}>
-                  {action.icon}
+            {/* Link to Home */}
+            <Link to="/">
+              <Tooltip title="Home">
+                <IconButton sx={{ color: "#fff" }}>
+                  <HomeIcon />
                 </IconButton>
               </Tooltip>
-            ))}
+            </Link>
+
+            {/* Link to add book */}
+            {isAuth && isAdmin && (
+              <Link to="/book/new">
+                <Tooltip title="Add book">
+                  <IconButton sx={{ color: "#fff" }}>
+                    <AddIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+            )}
+
+            {/* Link to Cart */}
+            {isAuth && !isAdmin && (
+              <Link to="/cart">
+                <Tooltip title="Cart">
+                  <IconButton sx={{ color: "#fff" }}>
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+            )}
+
+            {/* Login button */}
+            {!isAuth && (
+              <Link to="/login">
+                <Tooltip title="Login">
+                  <IconButton sx={{ color: "#fff" }}>
+                    <LoginIcon />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+            )}
+
+            {/* Logout button */}
+            {isAuth && (
+              <Tooltip title="Logout">
+                <IconButton sx={{ color: "#fff" }} onClick={logoutHandle}>
+                  <LogoutIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>

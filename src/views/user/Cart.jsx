@@ -3,7 +3,6 @@ import api from "../../api";
 import MediaControlCard from "../../components/MediaControlCard";
 import { Stack } from "@mui/material";
 import Empty from "../../components/Empty";
-import Header from "../../components/Header";
 
 const Cart = () => {
   const [books, setBooks] = useState();
@@ -21,7 +20,6 @@ const Cart = () => {
   if (!books) return <p>Loading...</p>;
   return (
     <>
-      <Header />
       {books.length === 0 ? (
         <Empty />
       ) : (

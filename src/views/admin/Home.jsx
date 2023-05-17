@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Header from "../../components/Header";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -102,7 +101,6 @@ const Home = () => {
 
   return (
     <>
-      <Header />
       <div style={{ minHeight: "100vh", paddingTop: 40, paddingBottom: 30 }}>
         {isAuth && role === "admin" && (
           <Button
