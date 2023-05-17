@@ -41,11 +41,11 @@ const App = () => {
           minHeight: "100vh",
           transition: "0.7s all ease",
         }}
-        justifyContent="center"
+        // justifyContent="center"
         bgcolor="#e3e3ff"
         paddingTop={7}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Suspense>
             <BrowserRouter>
               <SpeedDialButton />

@@ -14,7 +14,7 @@ const Empty = () => {
     navigate("/");
   };
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, marginTop: 20 }}>
       <CardContent>
         <Typography variant="h3" color="text.secondary" gutterBottom>
           Empty!

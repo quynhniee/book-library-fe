@@ -22,22 +22,22 @@ const Signup = () => {
       const cfPassword = cfPasswordRef.current.childNodes[0].value;
 
       if (name.trim() === "") {
-        helperText.current.textContent = "Name cannot be blank";
+        helperText.current.textContent = "Name cannot be blank!";
         return;
       }
 
       if (username.trim() === "") {
-        helperText.current.textContent = "Username cannot be blank";
+        helperText.current.textContent = "Username cannot be blank!";
         return;
       }
 
       if (password.trim() === "") {
-        helperText.current.textContent = "Password cannot be blank";
+        helperText.current.textContent = "Password cannot be blank!";
         return;
       }
 
       if (password !== cfPassword) {
-        helperText.current.textContent = "Confirm password does not match";
+        helperText.current.textContent = "Confirm password does not match!";
       } else {
         const response = await api.Auth.signup(name, username, password);
         console.log(response);

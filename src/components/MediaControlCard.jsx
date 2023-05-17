@@ -87,7 +87,7 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
   };
 
   return (
-    <Card sx={{ display: "flex", height: { sm: 200, lg: 230 } }}>
+    <Card sx={{ display: "flex", height: { sm: 200, lg: 200 } }}>
       <CardMedia
         component="img"
         sx={{ width: "30%" }}
@@ -100,7 +100,7 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h5">
+          <Typography variant="h5" marginBottom={2}>
             {book.title}
           </Typography>
           <Typography
@@ -134,15 +134,14 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
               startIcon={<AddShoppingCartIcon />}
               onClick={addToCartHandle}
             >
-              <Typography sx={{ display: { xs: "none", md: "block" } }}>
+              <Typography
+                sx={{
+                  display: { xs: "none", md: "block" },
+                  textTransform: "capitalize",
+                }}
+              >
                 Add to cart
               </Typography>
-            </Button>
-          )}
-
-          {isCart && (
-            <Button color="error" onClick={cancelOrderHandle}>
-              Cancel order
             </Button>
           )}
 
@@ -151,10 +150,25 @@ export default function MediaControlCard({ book, deleteBook, isCart }) {
             color="secondary"
             onClick={() => navigate(`/book/${book.id}`)}
           >
-            <Typography sx={{ display: { xs: "none", md: "block" } }}>
+            <Typography
+              sx={{
+                display: { xs: "none", md: "block" },
+                textTransform: "capitalize",
+              }}
+            >
               View
             </Typography>
           </Button>
+
+          {isCart && (
+            <Button
+              color="error"
+              onClick={cancelOrderHandle}
+              sx={{ textTransform: "capitalize" }}
+            >
+              Cancel order
+            </Button>
+          )}
         </Box>
       </Box>
     </Card>

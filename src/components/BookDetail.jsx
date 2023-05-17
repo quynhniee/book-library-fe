@@ -26,6 +26,9 @@ const categories = [
   { value: "mystery", label: "Mystery" },
   { value: "scifi", label: "Sci-Fi" },
   { value: "historical", label: "Historical" },
+  { value: "horror", label: "Horror" },
+  { value: "adventure", label: "Adventure" },
+  { value: "humor", label: "Humor" },
 ];
 
 const BookDetail = () => {
@@ -41,7 +44,7 @@ const BookDetail = () => {
     new Date().toISOString().substring(0, 10)
   );
   const [pages, setPages] = useState("");
-  const [category, setCategory] = useState("romance");
+  const [category, setCategory] = useState("");
   const [cover, setCover] = useState();
   const [selectedFile, setSelectedFile] = useState();
 
@@ -160,13 +163,6 @@ const BookDetail = () => {
 
   useEffect(() => {
     if (id === "new") {
-      setReadOnly(false);
-      setAuthor("");
-      setTitle("");
-      setCategory("romance");
-      setCover();
-      setPages("");
-      setDescription("");
       return;
     }
     api.Book.getById(id).then((data) => {
@@ -188,7 +184,7 @@ const BookDetail = () => {
       setReadOnly(false);
       setAuthor("");
       setTitle("");
-      setCategory("romance");
+      setCategory("");
       setCover();
       setPages("");
       setDescription("");
@@ -204,7 +200,7 @@ const BookDetail = () => {
             <Stack direction="row" spacing={3} padding={3} paddingBottom={5}>
               <Stack spacing={3} width="100%">
                 <Stack direction="row" spacing={2}>
-                  <FormControl fullWidth variant="standard">
+                  <FormControl fullWidth variant="standard" required>
                     <InputLabel htmlFor="title">Tiêu đề</InputLabel>
                     <Input
                       id="title"
@@ -214,7 +210,7 @@ const BookDetail = () => {
                       required
                     />
                   </FormControl>
-                  <FormControl fullWidth variant="standard">
+                  <FormControl fullWidth variant="standard" required>
                     <InputLabel htmlFor="author">Tác giả</InputLabel>
                     <Input
                       id="author"
@@ -241,7 +237,7 @@ const BookDetail = () => {
                 </Stack>
 
                 <Stack direction="row" spacing={2}>
-                  <FormControl fullWidth variant="standard">
+                  <FormControl fullWidth variant="standard" required>
                     <InputLabel htmlFor="releaseDate">
                       Ngày phát hành
                     </InputLabel>
@@ -290,22 +286,26 @@ const BookDetail = () => {
 
               <Stack width="100%" alignItems="center" spacing={3}>
                 <div>
-                  <Button
-                    variant="contained"
-                    component="label"
-                    disabled={readOnly}
-                  >
-                    Upload
-                    <input
-                      hidden
-                      accept="image/*"
-                      type="file"
-                      onChange={(e) => {
-                        setSelectedFile(e.target.files[0]);
-                        setCover(URL.createObjectURL(e.target.files[0]));
-                      }}
-                    />
-                  </Button>
+                  {isAdmin && (
+                    <Button
+                      variant="contained"
+                      component="label"
+                      disabled={readOnly}
+                    >
+                      Upload
+                      <input
+                        hidden
+                        accept="image/*"
+                        type="file"
+                        onChange={(e) => {
+                          setSelectedFile(e.target.files[0]);
+                          if (e.target?.files[0])
+                            setCover(URL.createObjectURL(e.target.files[0]));
+                          else setCover("");
+                        }}
+                      />
+                    </Button>
+                  )}
                 </div>
 
                 <Card>

@@ -21,12 +21,12 @@ const Login = () => {
       const password = passwordRef.current.childNodes[0].value;
 
       if (username.trim() === "") {
-        helperText.current.textContent = "Username cannot be blank";
+        helperText.current.textContent = "Username cannot be blank!";
         return;
       }
 
       if (password.trim() === "") {
-        helperText.current.textContent = "Password cannot be blank";
+        helperText.current.textContent = "Password cannot be blank!";
         return;
       }
 
@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <>
-      <Stack alignItems="center" justifyContent="center">
+      <Stack alignItems="center" justifyContent="center" marginTop={4}>
         <Typography fontSize={25} fontWeight="bold" mt={2} mb={2}>
           Login
         </Typography>
