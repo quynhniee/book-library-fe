@@ -20,6 +20,22 @@ const Signup = () => {
       const username = usernameRef.current.childNodes[0].value;
       const password = passwordRef.current.childNodes[0].value;
       const cfPassword = cfPasswordRef.current.childNodes[0].value;
+
+      if (name.trim() === "") {
+        helperText.current.textContent = "Name cannot be blank";
+        return;
+      }
+
+      if (username.trim() === "") {
+        helperText.current.textContent = "Username cannot be blank";
+        return;
+      }
+
+      if (password.trim() === "") {
+        helperText.current.textContent = "Password cannot be blank";
+        return;
+      }
+
       if (password !== cfPassword) {
         helperText.current.textContent = "Confirm password does not match";
       } else {

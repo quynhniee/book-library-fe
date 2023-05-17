@@ -19,6 +19,17 @@ const Login = () => {
     try {
       const username = usernameRef.current.childNodes[0].value;
       const password = passwordRef.current.childNodes[0].value;
+
+      if (username.trim() === "") {
+        helperText.current.textContent = "Username cannot be blank";
+        return;
+      }
+
+      if (password.trim() === "") {
+        helperText.current.textContent = "Password cannot be blank";
+        return;
+      }
+
       const response = await api.Auth.login(username, password);
 
       if (!response?.error) {
